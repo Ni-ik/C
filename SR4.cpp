@@ -19,14 +19,14 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 	switch (ul_reason_for_call)
 	{
 	case DLL_PROCESS_ATTACH:
-		MessageBox(NULL, TEXT("Загружается библиотека Петрашевич"), TEXT(""), MB_OK);
+		MessageBox(NULL, TEXT("Г‡Г ГЈГ°ГіГ¦Г ГҐГІГ±Гї ГЎГЁГЎГ«ГЁГ®ГІГҐГЄГ  ГЏГҐГІГ°Г ГёГҐГўГЁГ·"), TEXT(""), MB_OK);
 		break;
 	case DLL_THREAD_ATTACH:
 		break;
 	case DLL_THREAD_DETACH:
 		break;
 	case DLL_PROCESS_DETACH:
-			MessageBox(NULL, TEXT("Выгружается библиотека Петрашевич"), TEXT(""), MB_OK);
+			MessageBox(NULL, TEXT("Г‚Г»ГЈГ°ГіГ¦Г ГҐГІГ±Гї ГЎГЁГЎГ«ГЁГ®ГІГҐГЄГ  ГЏГҐГІГ°Г ГёГҐГўГЁГ·"), TEXT(""), MB_OK);
 		break;
 		
 	}
@@ -34,57 +34,57 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 }
 
 
-//функция читает файл и возвращает string - проитанную строку, fileName - имя файла которое читали 
+//ГґГіГ­ГЄГ¶ГЁГї Г·ГЁГІГ ГҐГІ ГґГ Г©Г« ГЁ ГўГ®Г§ГўГ°Г Г№Г ГҐГІ string - ГЇГ°Г®ГЁГІГ Г­Г­ГіГѕ Г±ГІГ°Г®ГЄГі, fileName - ГЁГ¬Гї ГґГ Г©Г«Г  ГЄГ®ГІГ®Г°Г®ГҐ Г·ГЁГІГ Г«ГЁ 
 void loadFile(char * string, char * fileName)
 {
 
-		OPENFILENAME ofn;   // структура нужна для открытия диалока открытия файла
+		OPENFILENAME ofn;   // Г±ГІГ°ГіГЄГІГіГ°Г  Г­ГіГ¦Г­Г  Г¤Г«Гї Г®ГІГЄГ°Г»ГІГЁГї Г¤ГЁГ Г«Г®ГЄГ  Г®ГІГЄГ°Г»ГІГЁГї ГґГ Г©Г«Г 
 		BOOL fRet ;
 		HANDLE hFile;
 		string[0] = '\0';
-		char * buffer = new char[1000]; //для формирований сообщений с ошибками 
-			//Иницализация OPENFILENAME
+		char * buffer = new char[1000]; //Г¤Г«Гї ГґГ®Г°Г¬ГЁГ°Г®ГўГ Г­ГЁГ© Г±Г®Г®ГЎГ№ГҐГ­ГЁГ© Г± Г®ГёГЁГЎГЄГ Г¬ГЁ 
+			//Г€Г­ГЁГ¶Г Г«ГЁГ§Г Г¶ГЁГї OPENFILENAME
 		ZeroMemory(&ofn, sizeof(OPENFILENAME));
 		ofn.lStructSize = sizeof(OPENFILENAME);
-		ofn.hwndOwner = NULL;  // hwnd – дескриптор окна–влвдельца
+		ofn.hwndOwner = NULL;  // hwnd вЂ“ Г¤ГҐГ±ГЄГ°ГЁГЇГІГ®Г° Г®ГЄГ­Г вЂ“ГўГ«ГўГ¤ГҐГ«ГјГ¶Г 
 		ofn.lpstrFile = fileName;
 		ofn.lpstrFile[0] = '\0';
 		ofn.nMaxFile = MAX_BYTES;
-		// Формирование массива строк шаблонов фильтра
+		// Г”Г®Г°Г¬ГЁГ°Г®ГўГ Г­ГЁГҐ Г¬Г Г±Г±ГЁГўГ  Г±ГІГ°Г®ГЄ ГёГ ГЎГ«Г®Г­Г®Гў ГґГЁГ«ГјГІГ°Г 
 		ofn.lpstrFilter = "All\0*.*\0Text\0*.TXT\0";
-		ofn.nFilterIndex = 1; // Индекс для текущего шаблона фильтра
-		ofn.lpstrFileTitle = NULL; // Без заголовка
+		ofn.nFilterIndex = 1; // Г€Г­Г¤ГҐГЄГ± Г¤Г«Гї ГІГҐГЄГіГ№ГҐГЈГ® ГёГ ГЎГ«Г®Г­Г  ГґГЁГ«ГјГІГ°Г 
+		ofn.lpstrFileTitle = NULL; // ГЃГҐГ§ Г§Г ГЈГ®Г«Г®ГўГЄГ 
 		ofn.nMaxFileTitle = 0;
-		ofn.lpstrInitialDir = NULL; // В качестве начального текущий каталог
+		ofn.lpstrInitialDir = NULL; // Г‚ ГЄГ Г·ГҐГ±ГІГўГҐ Г­Г Г·Г Г«ГјГ­Г®ГЈГ® ГІГҐГЄГіГ№ГЁГ© ГЄГ ГІГ Г«Г®ГЈ
 		ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
-		// Отображение диалогового окна
+		// ГЋГІГ®ГЎГ°Г Г¦ГҐГ­ГЁГҐ Г¤ГЁГ Г«Г®ГЈГ®ГўГ®ГЈГ® Г®ГЄГ­Г 
 		fRet = GetOpenFileName(&ofn);
 		if (fRet == FALSE) 
 		{
 			DWORD error = CommDlgExtendedError();
-			if (error!=0) //если была ошибка а не пользователь нажал cancel
+			if (error!=0) //ГҐГ±Г«ГЁ ГЎГ»Г«Г  Г®ГёГЁГЎГЄГ  Г  Г­ГҐ ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гј Г­Г Г¦Г Г« cancel
 			{
-				sprintf(buffer,"Ошибка в диалоговом окне №: 0x%x", error);
-				MessageBox(NULL,buffer,"Ошибка!",MB_OK);
+				sprintf(buffer,"ГЋГёГЁГЎГЄГ  Гў Г¤ГЁГ Г«Г®ГЈГ®ГўГ®Г¬ Г®ГЄГ­ГҐ В№: 0x%x", error);
+				MessageBox(NULL,buffer,"ГЋГёГЁГЎГЄГ !",MB_OK);
 			}
-			return;//ошибка в далоге
+			return;//Г®ГёГЁГЎГЄГ  Гў Г¤Г Г«Г®ГЈГҐ
 		}
 
-		//открываем файл 
+		//Г®ГІГЄГ°Г»ГўГ ГҐГ¬ ГґГ Г©Г« 
 		hFile = CreateFile(ofn.lpstrFile, GENERIC_READ,
 	        0, (LPSECURITY_ATTRIBUTES) NULL,
 			OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL,
 			(HANDLE) NULL);
 
-		//Проверка корректности открытия файла
+		//ГЏГ°Г®ГўГҐГ°ГЄГ  ГЄГ®Г°Г°ГҐГЄГІГ­Г®Г±ГІГЁ Г®ГІГЄГ°Г»ГІГЁГї ГґГ Г©Г«Г 
 		if(hFile == INVALID_HANDLE_VALUE) 
 		{
-			MessageBox(NULL,"Файл не Загружен!","Ошибка!",MB_OK);
+			MessageBox(NULL,"Г”Г Г©Г« Г­ГҐ Г‡Г ГЈГ°ГіГ¦ГҐГ­!","ГЋГёГЁГЎГЄГ !",MB_OK);
 			return;
 		}
 		
-		DWORD BuffSize=GetFileSize(hFile, NULL);//Размер файла
-		//Чтение из файла в буфер
+		DWORD BuffSize=GetFileSize(hFile, NULL);//ГђГ Г§Г¬ГҐГ° ГґГ Г©Г«Г 
+		//Г—ГІГҐГ­ГЁГҐ ГЁГ§ ГґГ Г©Г«Г  Гў ГЎГіГґГҐГ°
 		DWORD dwNumbOfBytes;
 		if (BuffSize<MAX_BYTES)
 		{
@@ -104,26 +104,26 @@ void loadFile(char * string, char * fileName)
 		}
 }
 
-//подсчитывает количесво слов, начинающихся на гласную
+//ГЇГ®Г¤Г±Г·ГЁГІГ»ГўГ ГҐГІ ГЄГ®Г«ГЁГ·ГҐГ±ГўГ® Г±Г«Г®Гў, Г­Г Г·ГЁГ­Г ГѕГ№ГЁГµГ±Гї Г­Г  ГЈГ«Г Г±Г­ГіГѕ
 int  countSymbols(char * symbols, char * string)
 {
 	int count = 0;
 
-	if (string == NULL) //проверка входных параметров
+	if (string == NULL) //ГЇГ°Г®ГўГҐГ°ГЄГ  ГўГµГ®Г¤Г­Г»Гµ ГЇГ Г°Г Г¬ГҐГІГ°Г®Гў
 		return 0;
-	//для определения первой глассной в тексте
+	//Г¤Г«Гї Г®ГЇГ°ГҐГ¤ГҐГ«ГҐГ­ГЁГї ГЇГҐГ°ГўГ®Г© ГЈГ«Г Г±Г±Г­Г®Г© Гў ГІГҐГЄГ±ГІГҐ
 	if(strchr(symbols,string[0])>0)
 	{
 		count++;
 	}
 
-	for (int i=0; i<(strlen(string)-1); i++) // идем по строке
+	for (int i=0; i<(strlen(string)-1); i++) // ГЁГ¤ГҐГ¬ ГЇГ® Г±ГІГ°Г®ГЄГҐ
 	{
-		if (string[i]==' ') // проверяем каждый символ содержится он в списке символов или нет
+		if (string[i]==' ') // ГЇГ°Г®ГўГҐГ°ГїГҐГ¬ ГЄГ Г¦Г¤Г»Г© Г±ГЁГ¬ГўГ®Г« Г±Г®Г¤ГҐГ°Г¦ГЁГІГ±Гї Г®Г­ Гў Г±ГЇГЁГ±ГЄГҐ Г±ГЁГ¬ГўГ®Г«Г®Гў ГЁГ«ГЁ Г­ГҐГІ
 		{
 			if(strchr(symbols,string[i+1])>0)
 			{
-			count ++; // если содержиться то увеличиваем счетчик
+			count ++; // ГҐГ±Г«ГЁ Г±Г®Г¤ГҐГ°Г¦ГЁГІГјГ±Гї ГІГ® ГіГўГҐГ«ГЁГ·ГЁГўГ ГҐГ¬ Г±Г·ГҐГІГ·ГЁГЄ
 			}
 		}
 	}
@@ -131,22 +131,23 @@ int  countSymbols(char * symbols, char * string)
 	return count;
 }
 
-//добавляет в конец файла fileName строку string
+//Г¤Г®ГЎГ ГўГ«ГїГҐГІ Гў ГЄГ®Г­ГҐГ¶ ГґГ Г©Г«Г  fileName Г±ГІГ°Г®ГЄГі string
 void updateFile(char * fileName, char * string)
 {
-	if (fileName == NULL || string == NULL) //проверка входных параметров
+	if (fileName == NULL || string == NULL) //ГЇГ°Г®ГўГҐГ°ГЄГ  ГўГµГ®Г¤Г­Г»Гµ ГЇГ Г°Г Г¬ГҐГІГ°Г®Гў
 		return;
 
-	FILE* file =  fopen(fileName,"ab"); //открываем файл для добавления
+	FILE* file =  fopen(fileName,"ab"); //Г®ГІГЄГ°Г»ГўГ ГҐГ¬ ГґГ Г©Г« Г¤Г«Гї Г¤Г®ГЎГ ГўГ«ГҐГ­ГЁГї
 
-    if (file == NULL) { //проверка что файл открыт
-		MessageBox(NULL,"Ошибка при открытии файла для записи","Ошибка",MB_OK);
+    if (file == NULL) { //ГЇГ°Г®ГўГҐГ°ГЄГ  Г·ГІГ® ГґГ Г©Г« Г®ГІГЄГ°Г»ГІ
+		MessageBox(NULL,"ГЋГёГЁГЎГЄГ  ГЇГ°ГЁ Г®ГІГЄГ°Г»ГІГЁГЁ ГґГ Г©Г«Г  Г¤Г«Гї Г§Г ГЇГЁГ±ГЁ","ГЋГёГЁГЎГЄГ ",MB_OK);
         return;
     }
     
-    fwrite(string, 1, strlen(string), file); //добавляем в файл строку
+    fwrite(string, 1, strlen(string), file); //Г¤Г®ГЎГ ГўГ«ГїГҐГ¬ Гў ГґГ Г©Г« Г±ГІГ°Г®ГЄГі
  
-    fclose(file); //закрываем файл
+    fclose(file); //Г§Г ГЄГ°Г»ГўГ ГҐГ¬ ГґГ Г©Г«
     
     return;
+	
 }
