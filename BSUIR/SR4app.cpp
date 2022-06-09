@@ -6,19 +6,19 @@
 #include "SR4.h"
 
 #pragma comment(lib,"SR4.lib")
-    //прототип оконной процедуры
+    //ГЇГ°Г®ГІГ®ГІГЁГЇ Г®ГЄГ®Г­Г­Г®Г© ГЇГ°Г®Г¶ГҐГ¤ГіГ°Г»
     LRESULT CALLBACK Pr5_WndProc(HWND, UINT, WPARAM, LPARAM);
 
-    //глобальные переменные
+    //ГЈГ«Г®ГЎГ Г«ГјГ­Г»ГҐ ГЇГҐГ°ГҐГ¬ГҐГ­Г­Г»ГҐ
     LPCTSTR g_lpszClassName  = TEXT("DLL");
-	LPCTSTR g_lpszAplicationTitle = TEXT("ЛР2-4 Петрашевич"); 
+	LPCTSTR g_lpszAplicationTitle = TEXT("Г‹Гђ2-4 ГЏГҐГІГ°Г ГёГҐГўГЁГ·"); 
 	
 	LPTSTR ProcImage = TEXT("C:\\Windows\\system32\\notepad.exe");
 	static TCHAR CmdParam[260] = TEXT("notepad.exe ");
 	HANDLE ThreadHandle;
 	HANDLE ProcHandle;
 	int g_count=0;
-	char symbols[]="aAoOiIuUeEаАоОиИеЕуУыиИяЯюЮёЁ";
+	char symbols[]="aAoOiIuUeEГ ГЂГ®ГЋГЁГ€ГҐГ…ГіГ“Г»ГЁГ€ГїГџГѕГћВёВЁ";
 
 	HINSTANCE hInstance;
 	WPARAM wPar;
@@ -34,7 +34,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpsz
 	   MSG msg;
 	   HWND hWnd;
 
-	    //заполняем структуру класса окна
+	    //Г§Г ГЇГ®Г«Г­ГїГҐГ¬ Г±ГІГ°ГіГЄГІГіГ°Гі ГЄГ«Г Г±Г±Г  Г®ГЄГ­Г 
 	   memset(&wc,0,sizeof(WNDCLASSEX));
 	   wc.cbSize=sizeof(WNDCLASSEX);
 	   wc.lpszClassName=g_lpszClassName;
@@ -48,16 +48,16 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpsz
 	   wc.cbClsExtra=0;
 	   wc.cbWndExtra=0;
 	   
-	   //регистрируем класс главного окна с проверкой
+	   //Г°ГҐГЈГЁГ±ГІГ°ГЁГ°ГіГҐГ¬ ГЄГ«Г Г±Г± ГЈГ«Г ГўГ­Г®ГЈГ® Г®ГЄГ­Г  Г± ГЇГ°Г®ГўГҐГ°ГЄГ®Г©
 	   if(!RegisterClassEx(&wc))
 	   {
-		   MessageBox(NULL,TEXT("Ошибка регистрации класса окна!"),TEXT("Ошибка"),MB_OK|MB_ICONERROR);
+		   MessageBox(NULL,TEXT("ГЋГёГЁГЎГЄГ  Г°ГҐГЈГЁГ±ГІГ°Г Г¶ГЁГЁ ГЄГ«Г Г±Г±Г  Г®ГЄГ­Г !"),TEXT("ГЋГёГЁГЎГЄГ "),MB_OK|MB_ICONERROR);
 		   return FALSE;
 	   }
-	   //2-ой способ подключения меню
+	   //2-Г®Г© Г±ГЇГ®Г±Г®ГЎ ГЇГ®Г¤ГЄГ«ГѕГ·ГҐГ­ГЁГї Г¬ГҐГ­Гѕ
 	    HMENU hMenu = LoadMenu(hInstance,MAKEINTRESOURCE(IDR_MENU1));
 	 
-	   //создаём главное окно
+	   //Г±Г®Г§Г¤Г ВёГ¬ ГЈГ«Г ГўГ­Г®ГҐ Г®ГЄГ­Г®
 	   hWnd=CreateWindowEx(NULL,g_lpszClassName,
 		   g_lpszAplicationTitle,
 		   WS_OVERLAPPEDWINDOW,
@@ -69,13 +69,13 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpsz
 		   hMenu,
 		   hInstance,
 		   NULL);
-	   //проверка создания главного окна
+	   //ГЇГ°Г®ГўГҐГ°ГЄГ  Г±Г®Г§Г¤Г Г­ГЁГї ГЈГ«Г ГўГ­Г®ГЈГ® Г®ГЄГ­Г 
 	  if(!hWnd)
 	   {
-		   MessageBox(NULL,TEXT("Окно не создано!"),TEXT("Ошибка"),MB_OK|MB_ICONERROR);
+		   MessageBox(NULL,TEXT("ГЋГЄГ­Г® Г­ГҐ Г±Г®Г§Г¤Г Г­Г®!"),TEXT("ГЋГёГЁГЎГЄГ "),MB_OK|MB_ICONERROR);
 		   return FALSE;
 	  }
-	  //отображение главного окна
+	  //Г®ГІГ®ГЎГ°Г Г¦ГҐГ­ГЁГҐ ГЈГ«Г ГўГ­Г®ГЈГ® Г®ГЄГ­Г 
 		   ShowWindow(hWnd,nCmdShow);
 		   UpdateWindow(hWnd);					
 
@@ -87,7 +87,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpsz
 	   return msg.wParam;
 }
 //////////////////////////////////////////////////////////////////////////////
-//-----------------------------оконная процедура главного окна--------------------------------------
+//-----------------------------Г®ГЄГ®Г­Г­Г Гї ГЇГ°Г®Г¶ГҐГ¤ГіГ°Г  ГЈГ«Г ГўГ­Г®ГЈГ® Г®ГЄГ­Г --------------------------------------
  LRESULT CALLBACK Pr5_WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	wPar=wParam;
@@ -103,11 +103,11 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpsz
 	return FALSE;
 }
 
- //функция обработки команд меню
+ //ГґГіГ­ГЄГ¶ГЁГї Г®ГЎГ°Г ГЎГ®ГІГЄГЁ ГЄГ®Г¬Г Г­Г¤ Г¬ГҐГ­Гѕ
 void WndProc_OnCommand(HWND hWnd,int wmld,HWND,UINT)
 {	
-	char * fileName = new char [1000];			//имя файла
-	char * fileString = new char [1000];		//текст из файла
+	char * fileName = new char [1000];			//ГЁГ¬Гї ГґГ Г©Г«Г 
+	char * fileString = new char [1000];		//ГІГҐГЄГ±ГІ ГЁГ§ ГґГ Г©Г«Г 
 	char * addString = new char [100];
 	char * fileName1 = new char [100];
 
@@ -117,40 +117,40 @@ void WndProc_OnCommand(HWND hWnd,int wmld,HWND,UINT)
 	case IDM_OPEN_COUNT:
            {
 			g_count=0; 
-		loadFile(fileString,fileName);	//загружаем текст из файла
+		loadFile(fileString,fileName);	//Г§Г ГЈГ°ГіГ¦Г ГҐГ¬ ГІГҐГЄГ±ГІ ГЁГ§ ГґГ Г©Г«Г 
 		
-		if (strlen(fileName)!=0) //если загрузка прошла успешно
+		if (strlen(fileName)!=0) //ГҐГ±Г«ГЁ Г§Г ГЈГ°ГіГ§ГЄГ  ГЇГ°Г®ГёГ«Г  ГіГ±ГЇГҐГёГ­Г®
 		{
-			g_count = countSymbols(symbols,fileString); //подсчитываем количество разделителей
-			sprintf(addString,"\nКоличество слов на гласную:%d",g_count); 
-			updateFile(fileName,addString); //дописываем в файл строку
-			MessageBox(hWnd, TEXT("          Файл обработан!            "),TEXT(""),MB_OK);
+			g_count = countSymbols(symbols,fileString); //ГЇГ®Г¤Г±Г·ГЁГІГ»ГўГ ГҐГ¬ ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г°Г Г§Г¤ГҐГ«ГЁГІГҐГ«ГҐГ©
+			sprintf(addString,"\nГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г±Г«Г®Гў Г­Г  ГЈГ«Г Г±Г­ГіГѕ:%d",g_count); 
+			updateFile(fileName,addString); //Г¤Г®ГЇГЁГ±Г»ГўГ ГҐГ¬ Гў ГґГ Г©Г« Г±ГІГ°Г®ГЄГі
+			MessageBox(hWnd, TEXT("          Г”Г Г©Г« Г®ГЎГ°Г ГЎГ®ГІГ Г­!            "),TEXT(""),MB_OK);
 			MessageBox(hWnd, addString,TEXT(""),MB_OK);
 		}
 		else
-			MessageBox(hWnd, TEXT("Ошибка обработки файла!"),TEXT(""),MB_OK|MB_ICONERROR);
+			MessageBox(hWnd, TEXT("ГЋГёГЁГЎГЄГ  Г®ГЎГ°Г ГЎГ®ГІГЄГЁ ГґГ Г©Г«Г !"),TEXT(""),MB_OK|MB_ICONERROR);
 		wsprintf((LPSTR)CmdParam, "notepad.exe %s", fileName);
 		   }    
 		break;
 	case IDM_SHOW_FILE:
 			{
 				CreatMyProcess(hWnd);
-				//закроем дескрипторы созданного процесса и потока, 
-				//чтобы отвязать дочерний процесс от родительского приложения
+				//Г§Г ГЄГ°Г®ГҐГ¬ Г¤ГҐГ±ГЄГ°ГЁГЇГІГ®Г°Г» Г±Г®Г§Г¤Г Г­Г­Г®ГЈГ® ГЇГ°Г®Г¶ГҐГ±Г±Г  ГЁ ГЇГ®ГІГ®ГЄГ , 
+				//Г·ГІГ®ГЎГ» Г®ГІГўГїГ§Г ГІГј Г¤Г®Г·ГҐГ°Г­ГЁГ© ГЇГ°Г®Г¶ГҐГ±Г± Г®ГІ Г°Г®Г¤ГЁГІГҐГ«ГјГ±ГЄГ®ГЈГ® ГЇГ°ГЁГ«Г®Г¦ГҐГ­ГЁГї
 				CloseHandle(ProcHandle);
 				CloseHandle(ThreadHandle);	
 			}
 			break;
 	
 		case IDM_EXIT:
-             MessageBox(hWnd, TEXT("         Выбран пункт 'Выход'        "),TEXT("Меню Файл"),MB_OK);
+             MessageBox(hWnd, TEXT("         Г‚Г»ГЎГ°Г Г­ ГЇГіГ­ГЄГІ 'Г‚Г»ГµГ®Г¤'        "),TEXT("ГЊГҐГ­Гѕ Г”Г Г©Г«"),MB_OK);
 		     DestroyWindow(hWnd);
 		break;
 		
 	}
 }
 
-//функция отрисовки окна
+//ГґГіГ­ГЄГ¶ГЁГї Г®ГІГ°ГЁГ±Г®ГўГЄГЁ Г®ГЄГ­Г 
 void WndProc_OnPaint(HWND hWnd)
 {
 	HDC hDC;
@@ -159,13 +159,13 @@ void WndProc_OnPaint(HWND hWnd)
 	EndPaint(hWnd,&ps);
 }
 
-//функция закрытия окна
+//ГґГіГ­ГЄГ¶ГЁГї Г§Г ГЄГ°Г»ГІГЁГї Г®ГЄГ­Г 
 void WndProc_OnClose(HWND hWnd)
 {
 	DestroyWindow(hWnd);
 	FORWARD_WM_CLOSE(hWnd,DefWindowProc);
 }
-//функция при разрушении окна
+//ГґГіГ­ГЄГ¶ГЁГї ГЇГ°ГЁ Г°Г Г§Г°ГіГёГҐГ­ГЁГЁ Г®ГЄГ­Г 
 void WndProc_OnDestroy(HWND hWnd)
 {
 	PostQuitMessage(0);
@@ -181,7 +181,7 @@ void CreatMyProcess(HWND hWnd)
 	si.cb=sizeof(si);
 	success=CreateProcess(ProcImage, CmdParam,NULL , NULL, FALSE, 0, NULL, NULL, &si, &pi);
 	if(!success)
-		MessageBox(hWnd,TEXT("Ошибка создания процесса!"),NULL,MB_OK|MB_ICONERROR);
+		MessageBox(hWnd,TEXT("ГЋГёГЁГЎГЄГ  Г±Г®Г§Г¤Г Г­ГЁГї ГЇГ°Г®Г¶ГҐГ±Г±Г !"),NULL,MB_OK|MB_ICONERROR);
 	ProcHandle=pi.hProcess;
 	ThreadHandle=pi.hThread;	
 }
